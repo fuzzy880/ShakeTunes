@@ -17,9 +17,20 @@ static CurrentSong *currentSong = nil;
     @synchronized(self) {
         if (!currentSong) {
             currentSong = [[CurrentSong alloc] init];
+            currentSong.musicPlayer = [[AVPlayer alloc] init];
         }
     }
     return currentSong;
+}
+
++ (void) playSong
+{
+    if ([CurrentSong currentSong].nowPlayingSong) {
+        AVPlayerItem *avSong = [AVPlayerItem playerItemWithURL:[[CurrentSong currentSong].nowPlayingSong valueForProperty:MPMediaItemPropertyAssetURL]];
+        [[CurrentSong currentSong].musicPlayer replaceCurrentItemWithPlayerItem:avSong];
+        [[CurrentSong currentSong].musicPlayer play];
+    }
+    
 }
 
 @end

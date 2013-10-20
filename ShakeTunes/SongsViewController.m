@@ -42,8 +42,7 @@
     MPMediaItem *songItem = [self.songsList objectAtIndex:indexPath.row];
     cell.textLabel.text = [songItem valueForProperty:MPMediaItemPropertyTitle];
     cell.detailTextLabel.text = [songItem valueForProperty:MPMediaItemPropertyArtist];
-    //MPMediaItemArtwork *albumArt = [songItem valueForProperty:MPMediaItemPropertyArtwork];
-    //cell.imageView.image = [albumArt imageWithSize:CGSizeMake(20, 20)];
+    
     return cell;
 }
 
@@ -53,6 +52,7 @@
     MPMediaItem *songItem = [selectedSongs representativeItem];
     [CurrentSong currentSong].nowPlayingSong = songItem;
     NSLog(@"Now playing song is %@", [songItem valueForProperty:MPMediaItemPropertyTitle]);
+    [CurrentSong playSong];
 }
 
 

@@ -8,11 +8,15 @@
 
 #import <Foundation/Foundation.h>
 #import <MediaPlayer/MediaPlayer.h>
+#import <AVFoundation/AVFoundation.h>
 
 @interface CurrentSong : NSObject
 
 @property (strong, nonatomic) MPMediaItem *nowPlayingSong;
+@property (strong, nonatomic) AVPlayer *musicPlayer;
 
 + (CurrentSong *) currentSong;
+
++ (void) playSong;
 
 @end
