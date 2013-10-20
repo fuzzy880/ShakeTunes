@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *currentSongTitle;
 @property (weak, nonatomic) IBOutlet UILabel *currentArtist;
 @property (weak, nonatomic) IBOutlet UIProgressView *currentTrackProgress;
+@property (weak, nonatomic) IBOutlet UIButton *playPauseButton;
 
 - (IBAction)togglePlayPause:(id)sender;
 

@@ -16,27 +16,30 @@
 
 - (void) updateUI
 {
-    NSString *songTitle = [[CurrentSong currentSong].nowPlayingSong valueForProperty:MPMediaItemPropertyTitle];
-    if (songTitle) {
-        self.currentSongTitle.text = songTitle;
-    }
-    NSString *songArtist = [[CurrentSong currentSong].nowPlayingSong valueForProperty:MPMediaItemPropertyArtist];
-    if (songArtist) {
-        self.currentArtist.text = songArtist;
-    }
+    self.currentSongTitle.text = [[CurrentSong currentSong].nowPlayingSong valueForProperty:MPMediaItemPropertyTitle];
+    self.currentArtist.text = [[CurrentSong currentSong].nowPlayingSong valueForProperty:MPMediaItemPropertyArtist];
     MPMediaItemArtwork *albumArt = [[CurrentSong currentSong].nowPlayingSong valueForProperty:MPMediaItemPropertyArtwork];
-    if (albumArt) {
-        self.currentAlbumArt.image = [albumArt imageWithSize:CGSizeMake(320, 320)];
+    self.currentAlbumArt.image = [albumArt imageWithSize:CGSizeMake(320, 320)];
+    
+    if ([CurrentSong currentSong].musicPlayer) {
+        [self.playPauseButton setEnabled:YES];
+        if ([CurrentSong isPlaying]) {
+            [self.playPauseButton setTitle:@"Pause" forState:UIControlStateNormal];
+        } else {
+            [self.playPauseButton setTitle:@"Play" forState:UIControlStateNormal];
+        }
+    } else {
+        [self.playPauseButton setTitle:@"Play" forState:UIControlStateDisabled];
+        [self.playPauseButton setEnabled:NO];
     }
     
-    NSLog(@"%@", songTitle);
+    NSLog(@"%@", self.playPauseButton.titleLabel.text);
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-	// Do any additional setup after loading the view.
+    [self updateUI];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -44,6 +47,15 @@
     NSLog(@"%@", [[CurrentSong currentSong].nowPlayingSong valueForProperty:MPMediaItemPropertyTitle]);
 }
 
-- (IBAction)togglePlayPause:(id)sender {
+- (IBAction)togglePlayPause:(UIButton *)sender {
+    if ([CurrentSong isPlaying]) {
+        [CurrentSong pauseSong];
+    } else {
+        [CurrentSong resumeSong];
+    }
+    [self updateUI];
+    
 }
+
+
 @end

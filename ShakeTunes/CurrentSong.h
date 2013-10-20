@@ -13,10 +13,17 @@
 @interface CurrentSong : NSObject
 
 @property (strong, nonatomic) MPMediaItem *nowPlayingSong;
-@property (strong, nonatomic) AVPlayer *musicPlayer;
+@property (strong, nonatomic) AVAudioPlayer *musicPlayer;
+@property NSInteger repeat;
 
 + (CurrentSong *) currentSong;
 
 + (void) playSong;
+
++ (void) resumeSong;
+
++ (void) pauseSong;
+
++ (BOOL) isPlaying;
 
 @end
