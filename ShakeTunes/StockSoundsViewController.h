@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface StockSoundsViewController : UIViewController
+@interface StockSoundsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @end

@@ -16,14 +16,14 @@
 
 - (void) updateUI
 {
-    self.currentSongTitle.text = [[CurrentSong currentSong].nowPlayingSong valueForProperty:MPMediaItemPropertyTitle];
-    self.currentArtist.text = [[CurrentSong currentSong].nowPlayingSong valueForProperty:MPMediaItemPropertyArtist];
-    MPMediaItemArtwork *albumArt = [[CurrentSong currentSong].nowPlayingSong valueForProperty:MPMediaItemPropertyArtwork];
+    self.currentSongTitle.text = [[Jukebox getSongItem] valueForProperty:MPMediaItemPropertyTitle];
+    self.currentArtist.text = [[Jukebox getSongItem] valueForProperty:MPMediaItemPropertyArtist];
+    MPMediaItemArtwork *albumArt = [[Jukebox getSongItem] valueForProperty:MPMediaItemPropertyArtwork];
     self.currentAlbumArt.image = [albumArt imageWithSize:CGSizeMake(320, 320)];
     
-    if ([CurrentSong currentSong].musicPlayer) {
+    if ([Jukebox shared].musicPlayer) {
         [self.playPauseButton setEnabled:YES];
-        if ([CurrentSong isPlaying]) {
+        if ([Jukebox isPlaying]) {
             [self.playPauseButton setTitle:@"Pause" forState:UIControlStateNormal];
         } else {
             [self.playPauseButton setTitle:@"Play" forState:UIControlStateNormal];
@@ -44,17 +44,28 @@
 
 - (void) viewWillAppear:(BOOL)animated {
     [self updateUI];
-    NSLog(@"%@", [[CurrentSong currentSong].nowPlayingSong valueForProperty:MPMediaItemPropertyTitle]);
+    NSLog(@"%@", [[Jukebox getSongItem] valueForProperty:MPMediaItemPropertyTitle]);
 }
 
 - (IBAction)togglePlayPause:(UIButton *)sender {
-    if ([CurrentSong isPlaying]) {
-        [CurrentSong pauseSong];
+    if ([Jukebox isPlaying]) {
+        [Jukebox pauseSong];
     } else {
-        [CurrentSong resumeSong];
+        [Jukebox resumeSong];
     }
     [self updateUI];
     
+}
+
+- (IBAction)playNextSong:(id)sender {
+    NSLog(@"Playing the next song");
+    [Jukebox playNextSong];
+    [self updateUI];
+}
+
+- (IBAction)playPreviousSong:(id)sender {
+    [Jukebox playPrevSong];
+    [self updateUI];
 }
 
 

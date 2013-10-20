@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <MediaPlayer/MediaPlayer.h>
-#include "CurrentSong.h"
+#include "Jukebox.h"
 
 @interface SongsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 

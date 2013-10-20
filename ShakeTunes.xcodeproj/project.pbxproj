@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8316B7001814820600206CCE /* test1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8316B6FD1814820500206CCE /* test1.mp3 */; };
+		8316B7011814820600206CCE /* test2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8316B6FE1814820500206CCE /* test2.mp3 */; };
+		8316B7021814820600206CCE /* test3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8316B6FF1814820500206CCE /* test3.mp3 */; };
 		831B88B5181101F300984F6E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 831B88B4181101F300984F6E /* Foundation.framework */; };
 		831B88B7181101F300984F6E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 831B88B6181101F300984F6E /* CoreGraphics.framework */; };
 		831B88B9181101F300984F6E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 831B88B8181101F300984F6E /* UIKit.framework */; };
@@ -28,7 +31,7 @@
 		83CA7568181364000066FE9B /* StockSoundsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CA7567181364000066FE9B /* StockSoundsViewController.m */; };
 		83CA756A18138AA60066FE9B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83CA756918138AA60066FE9B /* AVFoundation.framework */; };
 		83CA756C18138AD40066FE9B /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83CA756B18138AD40066FE9B /* MediaPlayer.framework */; };
-		83CA756F181397860066FE9B /* CurrentSong.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CA756E181397860066FE9B /* CurrentSong.m */; };
+		83CA756F181397860066FE9B /* Jukebox.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CA756E181397860066FE9B /* Jukebox.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +45,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8316B6FC1814471600206CCE /* NowPlayingDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NowPlayingDelegate.h; sourceTree = "<group>"; };
+		8316B6FD1814820500206CCE /* test1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = test1.mp3; sourceTree = "<group>"; };
+		8316B6FE1814820500206CCE /* test2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = test2.mp3; sourceTree = "<group>"; };
+		8316B6FF1814820500206CCE /* test3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = test3.mp3; sourceTree = "<group>"; };
 		831B88B1181101F300984F6E /* ShakeTunes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShakeTunes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		831B88B4181101F300984F6E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		831B88B6181101F300984F6E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -72,8 +79,8 @@
 		83CA7567181364000066FE9B /* StockSoundsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StockSoundsViewController.m; sourceTree = "<group>"; };
 		83CA756918138AA60066FE9B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		83CA756B18138AD40066FE9B /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
-		83CA756D181397860066FE9B /* CurrentSong.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentSong.h; sourceTree = "<group>"; };
-		83CA756E181397860066FE9B /* CurrentSong.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentSong.m; sourceTree = "<group>"; };
+		83CA756D181397860066FE9B /* Jukebox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Jukebox.h; sourceTree = "<group>"; };
+		83CA756E181397860066FE9B /* Jukebox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Jukebox.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +150,7 @@
 				831B88C9181101F300984F6E /* Main_iPad.storyboard */,
 				83CA755718130D600066FE9B /* MusicPageViewController.h */,
 				83CA755818130D600066FE9B /* MusicPageViewController.m */,
+				8316B6FC1814471600206CCE /* NowPlayingDelegate.h */,
 				831B88CF181101F300984F6E /* Images.xcassets */,
 				831B88BB181101F300984F6E /* Supporting Files */,
 				83CA755A1813104C0066FE9B /* NowPlayingViewController.h */,
@@ -153,8 +161,11 @@
 				83CA7564181363F40066FE9B /* ArtistsViewController.m */,
 				83CA7566181364000066FE9B /* StockSoundsViewController.h */,
 				83CA7567181364000066FE9B /* StockSoundsViewController.m */,
-				83CA756D181397860066FE9B /* CurrentSong.h */,
-				83CA756E181397860066FE9B /* CurrentSong.m */,
+				83CA756D181397860066FE9B /* Jukebox.h */,
+				83CA756E181397860066FE9B /* Jukebox.m */,
+				8316B6FD1814820500206CCE /* test1.mp3 */,
+				8316B6FE1814820500206CCE /* test2.mp3 */,
+				8316B6FF1814820500206CCE /* test3.mp3 */,
 			);
 			path = ShakeTunes;
 			sourceTree = "<group>";
@@ -265,7 +276,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				831B88CB181101F300984F6E /* Main_iPad.storyboard in Resources */,
+				8316B7011814820600206CCE /* test2.mp3 in Resources */,
+				8316B7001814820600206CCE /* test1.mp3 in Resources */,
 				831B88D0181101F300984F6E /* Images.xcassets in Resources */,
+				8316B7021814820600206CCE /* test3.mp3 in Resources */,
 				831B88C8181101F300984F6E /* Main_iPhone.storyboard in Resources */,
 				831B88BF181101F300984F6E /* InfoPlist.strings in Resources */,
 			);
@@ -288,7 +302,7 @@
 			files = (
 				83CA755C1813104C0066FE9B /* NowPlayingViewController.m in Sources */,
 				83CA7565181363F40066FE9B /* ArtistsViewController.m in Sources */,
-				83CA756F181397860066FE9B /* CurrentSong.m in Sources */,
+				83CA756F181397860066FE9B /* Jukebox.m in Sources */,
 				83CA755918130D600066FE9B /* MusicPageViewController.m in Sources */,
 				83CA7568181364000066FE9B /* StockSoundsViewController.m in Sources */,
 				83CA7562181363E40066FE9B /* SongsViewController.m in Sources */,

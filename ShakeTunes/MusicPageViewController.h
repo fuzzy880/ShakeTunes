@@ -10,5 +10,10 @@
 #import "NowPlayingViewController.h"
 
 @interface MusicPageViewController : UIPageViewController <UIPageViewControllerDataSource>
+{
+    //id <NowPlayingDelegate> musicDelegate;
+}
+
+@property (nonatomic,assign)  id <NowPlayingDelegate> musicDelegate;
 
 @end

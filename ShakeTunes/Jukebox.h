@@ -10,19 +10,26 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import <AVFoundation/AVFoundation.h>
 
-@interface CurrentSong : NSObject
+@interface Jukebox : NSObject
 
-@property (strong, nonatomic) MPMediaItem *nowPlayingSong;
+@property NSInteger nowPlaying;
+@property (strong, nonatomic) NSMutableArray  *queue;
 @property (strong, nonatomic) AVAudioPlayer *musicPlayer;
 @property NSInteger repeat;
 
-+ (CurrentSong *) currentSong;
++ (Jukebox *) shared;
+
++ (MPMediaItem *) getSongItem;
 
 + (void) playSong;
 
 + (void) resumeSong;
 
 + (void) pauseSong;
+
++ (void) playNextSong;
+
++ (void) playPrevSong;
 
 + (BOOL) isPlaying;
 

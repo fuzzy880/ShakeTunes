@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#include "CurrentSong.h"
-@interface NowPlayingViewController : UIViewController
+#include "Jukebox.h"
+#include "NowPlayingDelegate.h"
+
+
+@interface NowPlayingViewController : UIViewController <NowPlayingDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *currentAlbumArt;
 @property (weak, nonatomic) IBOutlet UILabel *currentSongTitle;

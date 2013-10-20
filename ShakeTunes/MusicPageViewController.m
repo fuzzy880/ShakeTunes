@@ -18,7 +18,10 @@
 {
     [super viewDidLoad];
     self.dataSource = self;
-    NSArray *initViewController = @[[self. storyboard instantiateViewControllerWithIdentifier:@"NowPlaying"]];
+    
+    id nowPlayingVC = [self. storyboard instantiateViewControllerWithIdentifier:@"NowPlaying"];
+    self.musicDelegate = nowPlayingVC;
+    NSArray *initViewController = @[nowPlayingVC];
     [self setViewControllers:initViewController direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
 }
 
@@ -60,11 +63,12 @@
 {
     if (motion == UIEventSubtypeMotionShake) {
         NSLog(@"Detected shake!");
-        if ([CurrentSong isPlaying]) {
-            [CurrentSong pauseSong];
+        if ([Jukebox isPlaying]) {
+            [Jukebox pauseSong];
         } else {
-            [CurrentSong resumeSong];
+            [Jukebox resumeSong];
         }
+        [self.musicDelegate updateUI];
     }
 }
 

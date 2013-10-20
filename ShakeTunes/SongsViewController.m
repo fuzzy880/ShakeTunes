@@ -10,7 +10,6 @@
 
 @interface SongsViewController ()
 
-@property (strong, nonatomic) NSMutableArray *songsList;
 
 @end
 
@@ -19,17 +18,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     MPMediaQuery *everything = [[MPMediaQuery alloc] init];
-    self.songsList = [[everything items] mutableCopy];
-    for (MPMediaItem *song in self.songsList) {
+    [Jukebox shared].queue = [[everything items] mutableCopy];
+    for (MPMediaItem *song in [Jukebox shared].queue) {
         NSLog(@"%@", [song valueForProperty:MPMediaItemPropertyTitle]);
     }
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSLog(@"Loaded %d songs from iPod Library", [self.songsList count]);
-    return [self.songsList count];
+    NSLog(@"Loaded %lu songs from iPod Library", (unsigned long)[[Jukebox shared].queue count]);
+    return [[Jukebox shared].queue count];
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -39,7 +39,7 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellId];
     }
-    MPMediaItem *songItem = [self.songsList objectAtIndex:indexPath.row];
+    MPMediaItem *songItem = [[Jukebox shared].queue objectAtIndex:indexPath.row];
     cell.textLabel.text = [songItem valueForProperty:MPMediaItemPropertyTitle];
     cell.detailTextLabel.text = [songItem valueForProperty:MPMediaItemPropertyArtist];
     
@@ -48,11 +48,8 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MPMediaItemCollection *selectedSongs = [self.songsList objectAtIndex:indexPath.row];
-    MPMediaItem *songItem = [selectedSongs representativeItem];
-    [CurrentSong currentSong].nowPlayingSong = songItem;
-    NSLog(@"Now playing song is %@", [songItem valueForProperty:MPMediaItemPropertyTitle]);
-    [CurrentSong playSong];
+    [Jukebox shared].nowPlaying = indexPath.row;
+    [Jukebox playSong];
 }
 
 
