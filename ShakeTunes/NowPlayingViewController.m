@@ -2,6 +2,9 @@
 //  NowPlayingViewController.m
 //  ShakeTunes
 //
+//  This view controller implements functionality to update the view with changes from Jukebox.
+//  In addition, buttons on the view will invoke actions to change the song.
+//
 //  Created by Chris Wong on 10/19/13.
 //  Copyright (c) 2013 Chris Wong. All rights reserved.
 //
@@ -14,6 +17,7 @@
 
 @implementation NowPlayingViewController
 
+//Update song details and play/pause button
 - (void) updateUI
 {
     self.currentSongTitle.text = [[Jukebox getSongItem] valueForProperty:MPMediaItemPropertyTitle];
@@ -32,8 +36,7 @@
         [self.playPauseButton setTitle:@"Play" forState:UIControlStateDisabled];
         [self.playPauseButton setEnabled:NO];
     }
-    
-    NSLog(@"%@", self.playPauseButton.titleLabel.text);
+    NSLog(@"UpdateUI: Play Button set to :%@", self.playPauseButton.titleLabel.text);
 }
 
 - (void)viewDidLoad
@@ -43,8 +46,8 @@
 }
 
 - (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [self updateUI];
-    NSLog(@"%@", [[Jukebox getSongItem] valueForProperty:MPMediaItemPropertyTitle]);
 }
 
 - (IBAction)togglePlayPause:(UIButton *)sender {
@@ -54,11 +57,9 @@
         [Jukebox resumeSong];
     }
     [self updateUI];
-    
 }
 
 - (IBAction)playNextSong:(id)sender {
-    NSLog(@"Playing the next song");
     [Jukebox playNextSong];
     [self updateUI];
 }

@@ -2,6 +2,9 @@
 //  StockSoundsViewController.m
 //  ShakeTunes
 //
+//  This view controller loads the included sounds in the projects into a table view.  Selecting
+//  a row plays the song.
+//
 //  Created by Chris Wong on 10/19/13.
 //  Copyright (c) 2013 Chris Wong. All rights reserved.
 //
@@ -41,6 +44,7 @@
     return cell;
 }
 
+//Load the 3 stock songs from the project
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -50,12 +54,10 @@
     [self.stockSounds addObject:firstSound];
     [self.stockSounds addObject:secondSound];
     [self.stockSounds addObject:thirdSound];
-    NSLog(@"%@",[[self.stockSounds objectAtIndex:0] lastPathComponent]);
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"%ld", (long)indexPath.row);
     [Jukebox shared].queue = self.stockSounds;
     [Jukebox shared].nowPlaying = indexPath.row;
     [Jukebox playSong];

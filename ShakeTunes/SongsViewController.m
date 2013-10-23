@@ -2,6 +2,9 @@
 //  SongsViewController.m
 //  ShakeTunes
 //
+//  This view controller implements the All Songs tab.  On load, the iOS media library is
+//  queried and displayed in a table.  Selecting a row plays the song.
+//
 //  Created by Chris Wong on 10/19/13.
 //  Copyright (c) 2013 Chris Wong. All rights reserved.
 //
@@ -24,22 +27,19 @@
     return _allSongs;
 }
 
+//Get all songs from iOS iPod library
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     MPMediaQuery *everything = [[MPMediaQuery alloc] init];
     self.allSongs = [[everything items] mutableCopy];
-    [Jukebox shared].queue = self.allSongs;
-    for (MPMediaItem *song in [Jukebox shared].queue) {
-        NSLog(@"%@", [song valueForProperty:MPMediaItemPropertyTitle]);
-    }
+    //[Jukebox shared].queue = self.allSongs;
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSLog(@"Loaded %lu songs from iPod Library", (unsigned long)[[Jukebox shared].queue count]);
-    return [[Jukebox shared].queue count];
+    return [self.allSongs count];
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

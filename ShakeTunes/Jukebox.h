@@ -2,6 +2,9 @@
 //  CurrentSong.h
 //  ShakeTunes
 //
+//  This model implements an API for music playback.  The queue provides the song context
+//  and is set by the music picker views.
+//
 //  Created by Chris Wong on 10/19/13.
 //  Copyright (c) 2013 Chris Wong. All rights reserved.
 //

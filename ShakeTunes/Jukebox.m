@@ -2,6 +2,9 @@
 //  CurrentSong.m
 //  ShakeTunes
 //
+//  This model implements an API for music playback.  The queue provides the song context
+//  and is set by the music picker views.
+//
 //  Created by Chris Wong on 10/19/13.
 //  Copyright (c) 2013 Chris Wong. All rights reserved.
 //
@@ -24,6 +27,7 @@ static Jukebox *currentSong = nil;
     return currentSong;
 }
 
+//Returns the song item if the current queue context is from the iOS music library
 + (MPMediaItem *) getSongItem
 {
     if ([Jukebox shared].nowPlaying >= 0 && [Jukebox shared].nowPlaying < [[Jukebox shared].queue count]) {
@@ -35,20 +39,22 @@ static Jukebox *currentSong = nil;
     return nil;
 }
 
+//Plays the set song
 + (void) playSong
 {
     if ([Jukebox shared].nowPlaying >= 0 && [Jukebox shared].nowPlaying < [[Jukebox shared].queue count]) {
         NSError *error = nil;
         id selectedSongs = [[Jukebox shared].queue objectAtIndex:[Jukebox shared].nowPlaying];
         NSURL *songLocation = nil;
+        //Playing project music files
         if ([selectedSongs isKindOfClass:[NSURL class]]) {
             songLocation = selectedSongs;
+        //Playing iOS music library files
         } else {
             MPMediaItem *songItem = [selectedSongs representativeItem];
             songLocation = [songItem valueForProperty:MPMediaItemPropertyAssetURL];
         }
         [Jukebox shared].musicPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:songLocation error:&error];
-        //NSLog(@"Error playing song %@", error);
         [Jukebox shared].musicPlayer.numberOfLoops = [Jukebox shared].repeat;
         [[Jukebox shared].musicPlayer play];
     }
@@ -56,10 +62,8 @@ static Jukebox *currentSong = nil;
 
 + (void) resumeSong
 {
-    if ([Jukebox shared].nowPlaying) {
-        if ([Jukebox shared].musicPlayer) {
-            [[Jukebox shared].musicPlayer play];
-        }
+    if ([Jukebox shared].musicPlayer) {
+        [[Jukebox shared].musicPlayer play];
     }
     
 }
@@ -71,8 +75,6 @@ static Jukebox *currentSong = nil;
 
 + (void) playNextSong
 {
-    NSLog(@"%d", ([Jukebox shared].nowPlaying + 1));
-    NSLog(@"%lu", (unsigned long)[[Jukebox shared].queue count]);
     if (([Jukebox shared].nowPlaying + 1) < [[Jukebox shared].queue count]) {
         [Jukebox shared].nowPlaying = [Jukebox shared].nowPlaying + 1;
         [Jukebox playSong];
@@ -89,7 +91,6 @@ static Jukebox *currentSong = nil;
 
 + (BOOL) isPlaying
 {
-    NSLog([[Jukebox shared].musicPlayer isPlaying] ? @"Yes" : @"No");
     return [[Jukebox shared].musicPlayer isPlaying];
 }
 
