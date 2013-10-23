@@ -26,9 +26,9 @@ static Jukebox *currentSong = nil;
 
 + (MPMediaItem *) getSongItem
 {
-    if ([Jukebox shared].nowPlaying) {
-        if ([Jukebox shared].nowPlaying > 0 && [Jukebox shared].nowPlaying < [[Jukebox shared].queue count]) {
-            MPMediaItemCollection *selectedSongs = [[Jukebox shared].queue objectAtIndex:[Jukebox shared].nowPlaying];
+    if ([Jukebox shared].nowPlaying >= 0 && [Jukebox shared].nowPlaying < [[Jukebox shared].queue count]) {
+        id selectedSongs = [[Jukebox shared].queue objectAtIndex:[Jukebox shared].nowPlaying];
+        if (![selectedSongs isKindOfClass:[NSURL class]]) {
             return [selectedSongs representativeItem];
         }
     }
@@ -37,17 +37,20 @@ static Jukebox *currentSong = nil;
 
 + (void) playSong
 {
-    if ([Jukebox shared].nowPlaying) {
-        if ([Jukebox shared].nowPlaying > 0 && [Jukebox shared].nowPlaying < [[Jukebox shared].queue count]) {
-            NSError *error = nil;
-            MPMediaItemCollection *selectedSongs = [[Jukebox shared].queue objectAtIndex:[Jukebox shared].nowPlaying];
+    if ([Jukebox shared].nowPlaying >= 0 && [Jukebox shared].nowPlaying < [[Jukebox shared].queue count]) {
+        NSError *error = nil;
+        id selectedSongs = [[Jukebox shared].queue objectAtIndex:[Jukebox shared].nowPlaying];
+        NSURL *songLocation = nil;
+        if ([selectedSongs isKindOfClass:[NSURL class]]) {
+            songLocation = selectedSongs;
+        } else {
             MPMediaItem *songItem = [selectedSongs representativeItem];
-            NSURL *songLocation = [songItem valueForProperty:MPMediaItemPropertyAssetURL];
-            [Jukebox shared].musicPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:songLocation error:&error];
-            NSLog(@"Error playing song %@", error);
-            [Jukebox shared].musicPlayer.numberOfLoops = [Jukebox shared].repeat;
-            [[Jukebox shared].musicPlayer play];
+            songLocation = [songItem valueForProperty:MPMediaItemPropertyAssetURL];
         }
+        [Jukebox shared].musicPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:songLocation error:&error];
+        //NSLog(@"Error playing song %@", error);
+        [Jukebox shared].musicPlayer.numberOfLoops = [Jukebox shared].repeat;
+        [[Jukebox shared].musicPlayer play];
     }
 }
 
@@ -69,7 +72,7 @@ static Jukebox *currentSong = nil;
 + (void) playNextSong
 {
     NSLog(@"%d", ([Jukebox shared].nowPlaying + 1));
-    NSLog(@"%d", [[Jukebox shared].queue count]);
+    NSLog(@"%lu", (unsigned long)[[Jukebox shared].queue count]);
     if (([Jukebox shared].nowPlaying + 1) < [[Jukebox shared].queue count]) {
         [Jukebox shared].nowPlaying = [Jukebox shared].nowPlaying + 1;
         [Jukebox playSong];

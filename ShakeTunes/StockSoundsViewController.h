@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#include "Jukebox.h"
 
 @interface StockSoundsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 

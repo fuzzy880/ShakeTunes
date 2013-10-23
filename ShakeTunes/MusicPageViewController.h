@@ -11,7 +11,7 @@
 
 @interface MusicPageViewController : UIPageViewController <UIPageViewControllerDataSource>
 {
-    //id <NowPlayingDelegate> musicDelegate;
+    NSTimer *doubleShake;
 }
 
 @property (nonatomic,assign)  id <NowPlayingDelegate> musicDelegate;

@@ -10,17 +10,27 @@
 
 @interface SongsViewController ()
 
+@property (strong, nonatomic) NSMutableArray *allSongs;
 
 @end
 
 @implementation SongsViewController
+
+- (NSMutableArray *) allSongs
+{
+    if (!_allSongs) {
+        _allSongs = [[NSMutableArray alloc] init];
+    }
+    return _allSongs;
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     MPMediaQuery *everything = [[MPMediaQuery alloc] init];
-    [Jukebox shared].queue = [[everything items] mutableCopy];
+    self.allSongs = [[everything items] mutableCopy];
+    [Jukebox shared].queue = self.allSongs;
     for (MPMediaItem *song in [Jukebox shared].queue) {
         NSLog(@"%@", [song valueForProperty:MPMediaItemPropertyTitle]);
     }
@@ -39,7 +49,7 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellId];
     }
-    MPMediaItem *songItem = [[Jukebox shared].queue objectAtIndex:indexPath.row];
+    MPMediaItem *songItem = [self.allSongs objectAtIndex:indexPath.row];
     cell.textLabel.text = [songItem valueForProperty:MPMediaItemPropertyTitle];
     cell.detailTextLabel.text = [songItem valueForProperty:MPMediaItemPropertyArtist];
     
@@ -48,6 +58,7 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [Jukebox shared].queue = self.allSongs;
     [Jukebox shared].nowPlaying = indexPath.row;
     [Jukebox playSong];
 }

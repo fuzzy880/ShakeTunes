@@ -10,6 +10,8 @@
 
 @interface MusicPageViewController ()
 
+@property (nonatomic) NSUInteger shakesDetected;
+
 @end
 
 @implementation MusicPageViewController
@@ -18,7 +20,6 @@
 {
     [super viewDidLoad];
     self.dataSource = self;
-    
     id nowPlayingVC = [self. storyboard instantiateViewControllerWithIdentifier:@"NowPlaying"];
     self.musicDelegate = nowPlayingVC;
     NSArray *initViewController = @[nowPlayingVC];
@@ -62,14 +63,46 @@
 - (void) motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event
 {
     if (motion == UIEventSubtypeMotionShake) {
-        NSLog(@"Detected shake!");
-        if ([Jukebox isPlaying]) {
-            [Jukebox pauseSong];
-        } else {
-            [Jukebox resumeSong];
+        if (self.shakesDetected == 0) {
+            self.shakesDetected = 1;
+            doubleShake = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(checkDoubleShake) userInfo:nil repeats:NO];
+        } else if (self.shakesDetected >= 1) {
+            self.shakesDetected++;
         }
-        [self.musicDelegate updateUI];
     }
+}
+                            
+- (void) checkDoubleShake
+{
+    NSLog(@"%d", self.shakesDetected);
+    if (self.shakesDetected >= 2) {
+        [self nextSong];
+    } else if (self.shakesDetected == 1) {
+        [self pausePlaySong];
+    }
+    [doubleShake invalidate];
+    doubleShake = nil;
+    self.shakesDetected = 0;
+}
+
+
+- (void) pausePlaySong
+{
+    NSLog(@"Detected shake!");
+    if ([Jukebox isPlaying]) {
+        [Jukebox pauseSong];
+    } else {
+        [Jukebox resumeSong];
+    }
+    [self.musicDelegate updateUI];
+}
+
+- (void) nextSong
+{
+    if (![Jukebox isPlaying]) {
+        [Jukebox playNextSong];
+    }
+    [self.musicDelegate updateUI];
 }
 
 @end
