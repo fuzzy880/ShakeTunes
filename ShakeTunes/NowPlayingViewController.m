@@ -28,15 +28,15 @@
     if ([Jukebox shared].musicPlayer) {
         [self.playPauseButton setEnabled:YES];
         if ([Jukebox isPlaying]) {
-            [self.playPauseButton setTitle:@"Pause" forState:UIControlStateNormal];
+            [self.playPauseButton setTitle:@"Playing" forState:UIControlStateNormal];
         } else {
-            [self.playPauseButton setTitle:@"Play" forState:UIControlStateNormal];
+            [self.playPauseButton setTitle:@"Paused" forState:UIControlStateNormal];
         }
     } else {
-        [self.playPauseButton setTitle:@"Play" forState:UIControlStateDisabled];
+        [self.playPauseButton setTitle:@"" forState:UIControlStateDisabled];
         [self.playPauseButton setEnabled:NO];
     }
-    NSLog(@"UpdateUI: Play Button set to :%@", self.playPauseButton.titleLabel.text);
+    NSLog(@"UpdateUI: Play Button set to %@", self.playPauseButton.titleLabel.text);
 }
 
 - (void)viewDidLoad
