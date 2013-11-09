@@ -11,6 +11,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AudioToolbox/AudioToolbox.h>
 #import "NowPlayingViewController.h"
 
 @interface MusicPageViewController : UIPageViewController <UIPageViewControllerDataSource>

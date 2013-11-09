@@ -23,6 +23,7 @@
 		831B88D9181101F300984F6E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 831B88B8181101F300984F6E /* UIKit.framework */; };
 		831B88E1181101F300984F6E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 831B88DF181101F300984F6E /* InfoPlist.strings */; };
 		831B88E3181101F300984F6E /* ShakeTunesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 831B88E2181101F300984F6E /* ShakeTunesTests.m */; };
+		83B145DC182E2E56003B10D8 /* noArt.png in Resources */ = {isa = PBXBuildFile; fileRef = 83B145DB182E2E56003B10D8 /* noArt.png */; };
 		83C96D7C181777EB005654B3 /* test4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 83C96D7B181777EB005654B3 /* test4.mp3 */; };
 		83CA755918130D600066FE9B /* MusicPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CA755818130D600066FE9B /* MusicPageViewController.m */; };
 		83CA755C1813104C0066FE9B /* NowPlayingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CA755B1813104C0066FE9B /* NowPlayingViewController.m */; };
@@ -65,6 +66,7 @@
 		831B88DE181101F300984F6E /* ShakeTunesTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ShakeTunesTests-Info.plist"; sourceTree = "<group>"; };
 		831B88E0181101F300984F6E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		831B88E2181101F300984F6E /* ShakeTunesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShakeTunesTests.m; sourceTree = "<group>"; };
+		83B145DB182E2E56003B10D8 /* noArt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noArt.png; sourceTree = "<group>"; };
 		83C96D7B181777EB005654B3 /* test4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = test4.mp3; sourceTree = "<group>"; };
 		83CA755718130D600066FE9B /* MusicPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MusicPageViewController.h; sourceTree = "<group>"; };
 		83CA755818130D600066FE9B /* MusicPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MusicPageViewController.m; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 				83C96D7B181777EB005654B3 /* test4.mp3 */,
 				8316B6FE1814820500206CCE /* test2.mp3 */,
 				8316B6FF1814820500206CCE /* test3.mp3 */,
+				83B145DB182E2E56003B10D8 /* noArt.png */,
 			);
 			path = ShakeTunes;
 			sourceTree = "<group>";
@@ -270,6 +273,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83B145DC182E2E56003B10D8 /* noArt.png in Resources */,
 				83C96D7C181777EB005654B3 /* test4.mp3 in Resources */,
 				831B88CB181101F300984F6E /* Main_iPad.storyboard in Resources */,
 				8316B7011814820600206CCE /* test2.mp3 in Resources */,

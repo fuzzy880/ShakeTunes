@@ -52,7 +52,13 @@
     MPMediaItem *songItem = [self.allSongs objectAtIndex:indexPath.row];
     cell.textLabel.text = [songItem valueForProperty:MPMediaItemPropertyTitle];
     cell.detailTextLabel.text = [songItem valueForProperty:MPMediaItemPropertyArtist];
-    
+    UIImage *albumArt = [[songItem valueForProperty:MPMediaItemPropertyArtwork] imageWithSize:CGSizeMake(30, 30)];
+    if (albumArt) {
+        cell.imageView.image = albumArt;
+    } else {
+        cell.imageView.image = [UIImage imageNamed:@"noArt.png"];
+    }
+   
     return cell;
 }
 

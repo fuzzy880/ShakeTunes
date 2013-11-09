@@ -29,7 +29,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     self.dataSource = self;
     id nowPlayingController = [self. storyboard instantiateViewControllerWithIdentifier:@"NowPlaying"];
     self.musicDelegate = nowPlayingController;
@@ -76,7 +75,7 @@
         NSLog(@"Received shake event");
         if (self.shakesDetected == 0) {
             self.shakesDetected = 1;
-            shakeTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(interpretShakes) userInfo:nil repeats:NO];
+            shakeTimer = [NSTimer scheduledTimerWithTimeInterval:.75 target:self selector:@selector(interpretShakes) userInfo:nil repeats:NO];
         } else if (self.shakesDetected >= 1) {
             self.shakesDetected++;
         }
@@ -86,6 +85,7 @@
 //Called by shakeTimer to translate # of shakes to music action
 - (void) interpretShakes
 {
+    AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
     if (self.shakesDetected >= 2) {
         [self nextSong];
     } else if (self.shakesDetected == 1) {

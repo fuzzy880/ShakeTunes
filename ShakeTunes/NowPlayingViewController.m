@@ -12,7 +12,11 @@
 #import "NowPlayingViewController.h"
 
 @interface NowPlayingViewController ()
-
+@property (weak, nonatomic) IBOutlet UIImageView *currentAlbumArt;
+@property (weak, nonatomic) IBOutlet UILabel *currentSongTitle;
+@property (weak, nonatomic) IBOutlet UILabel *currentArtist;
+@property (weak, nonatomic) IBOutlet UIProgressView *currentTrackProgress;
+@property (weak, nonatomic) IBOutlet UIButton *playPauseButton;
 @end
 
 @implementation NowPlayingViewController
@@ -24,7 +28,7 @@
     self.currentArtist.text = [[Jukebox getSongItem] valueForProperty:MPMediaItemPropertyArtist];
     MPMediaItemArtwork *albumArt = [[Jukebox getSongItem] valueForProperty:MPMediaItemPropertyArtwork];
     self.currentAlbumArt.image = [albumArt imageWithSize:CGSizeMake(320, 320)];
-    
+    self.albumArtBlurred.image = [albumArt imageWithSize:CGSizeMake(320, 320)];
     if ([Jukebox shared].musicPlayer) {
         [self.playPauseButton setEnabled:YES];
         if ([Jukebox isPlaying]) {
@@ -43,12 +47,19 @@
 {
     [super viewDidLoad];
     [self updateUI];
+    
+    UIToolbar* blurView = [[UIToolbar alloc] initWithFrame:self.view.bounds];
+    blurView.barStyle = UIBarStyleBlack;
+    blurView.translucent = YES;
+    [self.view insertSubview:blurView aboveSubview:self.albumArtBlurred];
+
 }
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self updateUI];
 }
+
 
 - (IBAction)togglePlayPause:(UIButton *)sender {
     if ([Jukebox isPlaying]) {

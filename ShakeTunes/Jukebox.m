@@ -20,7 +20,7 @@ static Jukebox *currentSong = nil;
     @synchronized(self) {
         if (!currentSong) {
             currentSong = [[Jukebox alloc] init];
-            [Jukebox shared].repeat = -1;
+            [Jukebox shared].repeat = 0;
             [Jukebox shared].nowPlaying = -1;
         }
     }
