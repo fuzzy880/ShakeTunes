@@ -41,11 +41,11 @@
                                 <rect key="frame" x="0.0" y="77" width="319" height="344"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2At-gG-UpS">
-                                <rect key="frame" x="126" y="467" width="68" height="34"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2At-gG-UpS">
+                                <rect key="frame" x="148" y="479" width="30" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <state key="normal" title="Play">
+                                <state key="normal" title=" " image="playButton.png">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -68,10 +68,10 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LnJ-eE-dIC">
-                                <rect key="frame" x="255" y="467" width="30" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LnJ-eE-dIC">
+                                <rect key="frame" x="255" y="479" width="30" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title=">>">
+                                <state key="normal" title=" " image="NextButton.png">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -79,10 +79,10 @@
                                     <action selector="playNextSong:" destination="U6o-y3-oWM" eventType="touchUpInside" id="NNI-iD-paQ"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sJl-z4-ga6">
-                                <rect key="frame" x="36" y="467" width="30" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sJl-z4-ga6">
+                                <rect key="frame" x="36" y="479" width="30" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="&lt;&lt;">
+                                <state key="normal" title=" " image="PreviousButton.png">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -99,7 +99,9 @@
                         <outlet property="currentArtist" destination="6R5-QY-fJY" id="5YQ-u7-ZuQ"/>
                         <outlet property="currentSongTitle" destination="gwc-e2-VVT" id="T6k-Ls-7Lw"/>
                         <outlet property="currentTrackProgress" destination="VYR-y2-p6p" id="rOc-RL-Emg"/>
+                        <outlet property="nextButton" destination="LnJ-eE-dIC" id="u37-2b-LEA"/>
                         <outlet property="playPauseButton" destination="2At-gG-UpS" id="73X-ss-gHz"/>
+                        <outlet property="previousButton" destination="sJl-z4-ga6" id="ib7-LY-SjZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aoT-lb-jkb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -186,6 +188,11 @@
             <point key="canvasLocation" x="517" y="171"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="NextButton.png" width="40" height="30"/>
+        <image name="PreviousButton.png" width="40" height="30"/>
+        <image name="playButton.png" width="40" height="30"/>
+    </resources>
     <color key="tintColor" red="1" green="0.83787899667442955" blue="0.67963618213041832" alpha="1" colorSpace="calibratedRGB"/>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

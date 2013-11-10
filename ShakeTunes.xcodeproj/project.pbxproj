@@ -32,6 +32,10 @@
 		83CA756A18138AA60066FE9B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83CA756918138AA60066FE9B /* AVFoundation.framework */; };
 		83CA756C18138AD40066FE9B /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83CA756B18138AD40066FE9B /* MediaPlayer.framework */; };
 		83CA756F181397860066FE9B /* Jukebox.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CA756E181397860066FE9B /* Jukebox.m */; };
+		83EFD356182F35600078F1F9 /* NextButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 83EFD352182F35600078F1F9 /* NextButton.png */; };
+		83EFD357182F35600078F1F9 /* pauseButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 83EFD353182F35600078F1F9 /* pauseButton.png */; };
+		83EFD358182F35600078F1F9 /* playButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 83EFD354182F35600078F1F9 /* playButton.png */; };
+		83EFD359182F35600078F1F9 /* PreviousButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 83EFD355182F35600078F1F9 /* PreviousButton.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +84,10 @@
 		83CA756B18138AD40066FE9B /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		83CA756D181397860066FE9B /* Jukebox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Jukebox.h; sourceTree = "<group>"; };
 		83CA756E181397860066FE9B /* Jukebox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Jukebox.m; sourceTree = "<group>"; };
+		83EFD352182F35600078F1F9 /* NextButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NextButton.png; sourceTree = "<group>"; };
+		83EFD353182F35600078F1F9 /* pauseButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pauseButton.png; sourceTree = "<group>"; };
+		83EFD354182F35600078F1F9 /* playButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playButton.png; sourceTree = "<group>"; };
+		83EFD355182F35600078F1F9 /* PreviousButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PreviousButton.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +172,10 @@
 				8316B6FE1814820500206CCE /* test2.mp3 */,
 				8316B6FF1814820500206CCE /* test3.mp3 */,
 				83B145DB182E2E56003B10D8 /* noArt.png */,
+				83EFD352182F35600078F1F9 /* NextButton.png */,
+				83EFD353182F35600078F1F9 /* pauseButton.png */,
+				83EFD354182F35600078F1F9 /* playButton.png */,
+				83EFD355182F35600078F1F9 /* PreviousButton.png */,
 			);
 			path = ShakeTunes;
 			sourceTree = "<group>";
@@ -274,10 +286,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				83B145DC182E2E56003B10D8 /* noArt.png in Resources */,
+				83EFD358182F35600078F1F9 /* playButton.png in Resources */,
 				83C96D7C181777EB005654B3 /* test4.mp3 in Resources */,
 				831B88CB181101F300984F6E /* Main_iPad.storyboard in Resources */,
 				8316B7011814820600206CCE /* test2.mp3 in Resources */,
+				83EFD356182F35600078F1F9 /* NextButton.png in Resources */,
+				83EFD359182F35600078F1F9 /* PreviousButton.png in Resources */,
 				831B88D0181101F300984F6E /* Images.xcassets in Resources */,
+				83EFD357182F35600078F1F9 /* pauseButton.png in Resources */,
 				8316B7021814820600206CCE /* test3.mp3 in Resources */,
 				831B88C8181101F300984F6E /* Main_iPhone.storyboard in Resources */,
 				831B88BF181101F300984F6E /* InfoPlist.strings in Resources */,

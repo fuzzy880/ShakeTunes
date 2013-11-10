@@ -16,6 +16,13 @@
 
 @interface NowPlayingViewController : UIViewController <NowPlayingDelegate>
 
+@property (weak, nonatomic) IBOutlet UIImageView *currentAlbumArt;
+@property (weak, nonatomic) IBOutlet UILabel *currentSongTitle;
+@property (weak, nonatomic) IBOutlet UILabel *currentArtist;
+@property (weak, nonatomic) IBOutlet UIProgressView *currentTrackProgress;
+@property (weak, nonatomic) IBOutlet UIButton *playPauseButton;
+@property (weak, nonatomic) IBOutlet UIButton *previousButton;
+@property (weak, nonatomic) IBOutlet UIButton *nextButton;
 @property (weak, nonatomic) IBOutlet UIImageView *albumArtBlurred;
 
 - (IBAction)togglePlayPause:(id)sender;

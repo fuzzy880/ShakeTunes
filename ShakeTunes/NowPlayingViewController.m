@@ -11,14 +11,6 @@
 
 #import "NowPlayingViewController.h"
 
-@interface NowPlayingViewController ()
-@property (weak, nonatomic) IBOutlet UIImageView *currentAlbumArt;
-@property (weak, nonatomic) IBOutlet UILabel *currentSongTitle;
-@property (weak, nonatomic) IBOutlet UILabel *currentArtist;
-@property (weak, nonatomic) IBOutlet UIProgressView *currentTrackProgress;
-@property (weak, nonatomic) IBOutlet UIButton *playPauseButton;
-@end
-
 @implementation NowPlayingViewController
 
 //Update song details and play/pause button
@@ -30,15 +22,22 @@
     self.currentAlbumArt.image = [albumArt imageWithSize:CGSizeMake(320, 320)];
     self.albumArtBlurred.image = [albumArt imageWithSize:CGSizeMake(320, 320)];
     if ([Jukebox shared].musicPlayer) {
+        [self.nextButton setEnabled:YES];
+        [self.previousButton setEnabled:YES];
         [self.playPauseButton setEnabled:YES];
         if ([Jukebox isPlaying]) {
-            [self.playPauseButton setTitle:@"Playing" forState:UIControlStateNormal];
+            [self.playPauseButton setTitle:@"" forState:UIControlStateNormal];
+            [self.playPauseButton setImage:[UIImage imageNamed:@"pauseButton.png"] forState:UIControlStateNormal];
         } else {
-            [self.playPauseButton setTitle:@"Paused" forState:UIControlStateNormal];
+            [self.playPauseButton setTitle:@"" forState:UIControlStateNormal];
+            [self.playPauseButton setImage:[UIImage imageNamed:@"playButton.png"] forState:UIControlStateNormal];
         }
     } else {
         [self.playPauseButton setTitle:@"" forState:UIControlStateDisabled];
         [self.playPauseButton setEnabled:NO];
+        [self.nextButton setEnabled:NO];
+        [self.previousButton setEnabled:NO];
+        
     }
     NSLog(@"UpdateUI: Play Button set to %@", self.playPauseButton.titleLabel.text);
 }
