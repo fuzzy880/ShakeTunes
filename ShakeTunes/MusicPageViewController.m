@@ -2,10 +2,6 @@
 //  MusicPageViewController.m
 //  ShakeTunes
 //
-//  This view controller subclasses UIPageViewController to handle the navigation between
-//  Now Playing and Music Navigator through left and right swipes.
-//  Shake detection is handled and interfaces with music player based on number of shakes.
-//
 //  Created by Chris Wong on 10/19/13.
 //  Copyright (c) 2013 Chris Wong. All rights reserved.
 //
@@ -20,21 +16,19 @@
 
 @implementation MusicPageViewController
 
-- (BOOL) canBecomeFirstResponder
-{
-    return YES;
-}
 
-//Set datasource as the PageViewController, NowPlayingViewController as the delegate, and initial view controller
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     self.dataSource = self;
     id nowPlayingController = [self. storyboard instantiateViewControllerWithIdentifier:@"NowPlaying"];
     self.musicDelegate = nowPlayingController;
+
     NSArray *initViewController = @[nowPlayingController];
     [self setViewControllers:initViewController direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
 }
+
 
 - (void) viewDidAppear:(BOOL)animated
 {
@@ -42,13 +36,17 @@
     [self becomeFirstResponder];
 }
 
+
 - (void) viewWillDisappear:(BOOL)animated
 {
     [self resignFirstResponder];
     [super viewWillDisappear:animated];
 }
 
-//Sets NowPlayingViewController before MusicPickerTabViewController
+
+/**
+ * Sets NowPlayingViewController before MusicPickerTabViewController
+ */
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
 {
     if ([viewController isKindOfClass:[NowPlayingViewController class]]) {
@@ -58,7 +56,10 @@
     }
 }
 
-//Sets MusicPickerTabViewController after NowPlayingViewController
+
+/*
+ * Sets MusicPickerTabViewController after NowPlayingViewController
+ */
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
 {
     if ([viewController isKindOfClass:[NowPlayingViewController class]]) {
@@ -68,11 +69,11 @@
     }
 }
 
-//Intreprets 1 shake in 1 second as a play/pause toggle and 2 shakes in 1 second as next song
+
 - (void) motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event
 {
     if (motion == UIEventSubtypeMotionShake) {
-        NSLog(@"Received shake event");
+        NSLog(@"[MotionEvent]: Detected shake event");
         if (self.shakesDetected == 0) {
             self.shakesDetected = 1;
             shakeTimer = [NSTimer scheduledTimerWithTimeInterval:.75 target:self selector:@selector(interpretShakes) userInfo:nil repeats:NO];
@@ -82,19 +83,26 @@
     }
 }
 
-//Called by shakeTimer to translate # of shakes to music action
+
+/**
+ * Called by shakeTimer to translate # of shakes to music action
+ */
 - (void) interpretShakes
 {
     AudioServicesPlaySystemSound (kSystemSoundID_Vibrate);
+    
     if (self.shakesDetected >= 2) {
         [self nextSong];
     } else if (self.shakesDetected == 1) {
         [self pausePlaySong];
     }
+    
     [shakeTimer invalidate];
     shakeTimer = nil;
+    
     self.shakesDetected = 0;
 }
+
 
 - (void) pausePlaySong
 {
@@ -103,16 +111,29 @@
     } else {
         [Jukebox resumeSong];
     }
+    
     [self.musicDelegate updateUI];
-    NSLog(@"1 shake detected -> Toggling play/pause");
+    NSLog(@"[MotionEvent]: 1 shake detected -> toggling play/pause");
 }
+
 
 - (void) nextSong
 {
     [Jukebox playNextSong];
     [self.musicDelegate updateUI];
-    NSLog(@"2 shakes detected -> Playing next song");
+    NSLog(@"[MotionEvent]: 2 shakes detected -> playing next song");
 
+}
+
+- (BOOL) canBecomeFirstResponder
+{
+    return YES;
+}
+
+
+- (UIStatusBarStyle) preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
 }
 
 @end

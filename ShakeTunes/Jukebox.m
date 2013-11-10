@@ -2,9 +2,6 @@
 //  CurrentSong.m
 //  ShakeTunes
 //
-//  This model implements an API for music playback.  The queue provides the song context
-//  and is set by the music picker views.
-//
 //  Created by Chris Wong on 10/19/13.
 //  Copyright (c) 2013 Chris Wong. All rights reserved.
 //
@@ -27,7 +24,7 @@ static Jukebox *currentSong = nil;
     return currentSong;
 }
 
-//Returns the song item if the current queue context is from the iOS music library
+
 + (MPMediaItem *) getSongItem
 {
     if ([Jukebox shared].nowPlaying >= 0 && [Jukebox shared].nowPlaying < [[Jukebox shared].queue count]) {
@@ -39,7 +36,7 @@ static Jukebox *currentSong = nil;
     return nil;
 }
 
-//Plays the set song
+
 + (void) playSong
 {
     if ([Jukebox shared].nowPlaying >= 0 && [Jukebox shared].nowPlaying < [[Jukebox shared].queue count]) {
@@ -60,6 +57,7 @@ static Jukebox *currentSong = nil;
     }
 }
 
+
 + (void) resumeSong
 {
     if ([Jukebox shared].musicPlayer) {
@@ -68,10 +66,12 @@ static Jukebox *currentSong = nil;
     
 }
 
+
 + (void) pauseSong
 {
     [[Jukebox shared].musicPlayer pause];
 }
+
 
 + (void) playNextSong
 {
@@ -81,6 +81,7 @@ static Jukebox *currentSong = nil;
     }
 }
 
+
 + (void) playPrevSong
 {
     if (([Jukebox shared].nowPlaying - 1) > -1) {
@@ -88,6 +89,7 @@ static Jukebox *currentSong = nil;
         [Jukebox playSong];
     }
 }
+
 
 + (BOOL) isPlaying
 {

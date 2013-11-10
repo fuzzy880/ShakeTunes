@@ -2,7 +2,7 @@
 //  SongsViewController.h
 //  ShakeTunes
 //
-//  This view controller implements the All Songs tab.  On load, the iOS media library is
+//  Implements the All Songs tab.  On load, the iOS media library is
 //  queried and displayed in a table.  Selecting a row plays the song.
 //
 //  Created by Chris Wong on 10/19/13.

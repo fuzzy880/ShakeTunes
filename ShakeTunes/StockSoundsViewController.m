@@ -19,30 +19,6 @@
 
 @implementation StockSoundsViewController
 
-- (NSMutableArray *) stockSounds
-{
-    if (!_stockSounds) {
-        _stockSounds = [[NSMutableArray alloc] init];
-    }
-    return _stockSounds;
-}
-
-- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return [self.stockSounds count];
-}
-
-- (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *cellId = @"stockCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
-    }
-    
-    cell.textLabel.text = [[self.stockSounds objectAtIndex:indexPath.row] lastPathComponent];
-    return cell;
-}
 
 //Load the 3 stock songs from the project
 - (void)viewDidLoad
@@ -56,12 +32,40 @@
     [self.stockSounds addObject:thirdSound];
 }
 
+
+- (NSMutableArray *) stockSounds
+{
+    if (!_stockSounds) {
+        _stockSounds = [[NSMutableArray alloc] init];
+    }
+    return _stockSounds;
+}
+
+
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [self.stockSounds count];
+}
+
+
+- (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *cellId = @"stockCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
+    }
+    
+    cell.textLabel.text = [[self.stockSounds objectAtIndex:indexPath.row] lastPathComponent];
+    return cell;
+}
+
+
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [Jukebox shared].queue = self.stockSounds;
     [Jukebox shared].nowPlaying = indexPath.row;
     [Jukebox playSong];
 }
-
 
 @end
