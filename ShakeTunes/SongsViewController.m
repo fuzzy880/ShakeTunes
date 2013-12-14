@@ -45,6 +45,7 @@
 {
     static NSString *cellId = @"songCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+    
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellId];
     }
@@ -67,7 +68,7 @@
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [Jukebox shared].queue = self.allSongs;
-    [Jukebox shared].nowPlaying = indexPath.row;
+    [Jukebox shared].currentSong = indexPath.row;
     [Jukebox playSong];
 }
 

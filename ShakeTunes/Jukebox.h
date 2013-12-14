@@ -2,7 +2,7 @@
 //  CurrentSong.h
 //  ShakeTunes
 //
-//  This model implements an API for music playback.  The queue provides the song context
+//  Model implements an API for music playback.  The queue provides the song context
 //  and is set by the view controllers.
 //
 //  Created by Chris Wong on 10/19/13.
@@ -15,23 +15,24 @@
 
 @interface Jukebox : NSObject
 
-@property NSInteger nowPlaying;
+@property NSInteger repeat;
+@property NSInteger currentSong;
 @property (strong, nonatomic) NSMutableArray  *queue;
 @property (strong, nonatomic) AVAudioPlayer *musicPlayer;
-@property NSInteger repeat;
+
 
 /**
- * Get the shared singleton instance
+ * Get the shared singleton instance of music player
  */
 + (Jukebox *) shared;
 
 /**
- * Get the current song's metadata information
+ * Get the current song's metadata information if from iOS music library
  */
 + (MPMediaItem *) getSongItem;
 
 /**
- * Play the song in the queue at nowPlaying index
+ * Play the song in the queue at current index
  */
 + (void) playSong;
 

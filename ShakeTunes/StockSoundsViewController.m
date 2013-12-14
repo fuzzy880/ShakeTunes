@@ -24,12 +24,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSURL *firstSound = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"test2" ofType:@"mp3"]];
-    NSURL *secondSound = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"test3" ofType:@"mp3"]];
-    NSURL *thirdSound = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"test4" ofType:@"mp3"]];
-    [self.stockSounds addObject:firstSound];
-    [self.stockSounds addObject:secondSound];
-    [self.stockSounds addObject:thirdSound];
+    [self.stockSounds addObject:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"test2" ofType:@"mp3"]]];
+    [self.stockSounds addObject:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"test3" ofType:@"mp3"]]];
+    [self.stockSounds addObject:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"test4" ofType:@"mp3"]]];
 }
 
 
@@ -52,6 +49,7 @@
 {
     static NSString *cellId = @"stockCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+    
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
     }
@@ -64,7 +62,7 @@
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [Jukebox shared].queue = self.stockSounds;
-    [Jukebox shared].nowPlaying = indexPath.row;
+    [Jukebox shared].currentSong = indexPath.row;
     [Jukebox playSong];
 }
 

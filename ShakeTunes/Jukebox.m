@@ -10,25 +10,25 @@
 
 @implementation Jukebox
 
-static Jukebox *currentSong = nil;
+static Jukebox *player = nil;
 
 + (Jukebox *) shared
 {
     @synchronized(self) {
-        if (!currentSong) {
-            currentSong = [[Jukebox alloc] init];
+        if (!player) {
+            player = [[Jukebox alloc] init];
             [Jukebox shared].repeat = 0;
-            [Jukebox shared].nowPlaying = -1;
+            [Jukebox shared].currentSong = -1;
         }
     }
-    return currentSong;
+    return player;
 }
 
 
 + (MPMediaItem *) getSongItem
 {
-    if ([Jukebox shared].nowPlaying >= 0 && [Jukebox shared].nowPlaying < [[Jukebox shared].queue count]) {
-        id selectedSongs = [[Jukebox shared].queue objectAtIndex:[Jukebox shared].nowPlaying];
+    if ([Jukebox shared].currentSong >= 0 && [Jukebox shared].currentSong < [[Jukebox shared].queue count]) {
+        id selectedSongs = [[Jukebox shared].queue objectAtIndex:[Jukebox shared].currentSong];
         if (![selectedSongs isKindOfClass:[NSURL class]]) {
             return [selectedSongs representativeItem];
         }
@@ -39,9 +39,9 @@ static Jukebox *currentSong = nil;
 
 + (void) playSong
 {
-    if ([Jukebox shared].nowPlaying >= 0 && [Jukebox shared].nowPlaying < [[Jukebox shared].queue count]) {
+    if ([Jukebox shared].currentSong >= 0 && [Jukebox shared].currentSong < [[Jukebox shared].queue count]) {
         NSError *error = nil;
-        id selectedSongs = [[Jukebox shared].queue objectAtIndex:[Jukebox shared].nowPlaying];
+        id selectedSongs = [[Jukebox shared].queue objectAtIndex:[Jukebox shared].currentSong];
         NSURL *songLocation = nil;
         //Playing project music files
         if ([selectedSongs isKindOfClass:[NSURL class]]) {
@@ -75,8 +75,8 @@ static Jukebox *currentSong = nil;
 
 + (void) playNextSong
 {
-    if (([Jukebox shared].nowPlaying + 1) < [[Jukebox shared].queue count]) {
-        [Jukebox shared].nowPlaying = [Jukebox shared].nowPlaying + 1;
+    if (([Jukebox shared].currentSong + 1) < [[Jukebox shared].queue count]) {
+        [Jukebox shared].currentSong = [Jukebox shared].currentSong + 1;
         [Jukebox playSong];
     }
 }
@@ -84,8 +84,8 @@ static Jukebox *currentSong = nil;
 
 + (void) playPrevSong
 {
-    if (([Jukebox shared].nowPlaying - 1) > -1) {
-        [Jukebox shared].nowPlaying = [Jukebox shared].nowPlaying - 1;
+    if (([Jukebox shared].currentSong - 1) > -1) {
+        [Jukebox shared].currentSong = [Jukebox shared].currentSong - 1;
         [Jukebox playSong];
     }
 }
